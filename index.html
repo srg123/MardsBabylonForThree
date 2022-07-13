@@ -69,9 +69,11 @@
             //     // This targets the camera to scene origin
             //     camera.setTarget(BABYLON.Vector3.Zero());
 
-            //var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 200, BABYLON.Vector3.Zero(), scene);
-               const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2.5, 150, new BABYLON.Vector3(0, 60, 0));
+            var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 60, BABYLON.Vector3.Zero(), scene);
+              // const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2.5, 150, new BABYLON.Vector3(0, 60, 0));
+                  camera.setTarget(BABYLON.Vector3.Zero());
               camera.upperBetaLimit = Math.PI / 2.2;
+          
               camera.attachControl(canvas, true);
 
 
@@ -461,12 +463,12 @@
                 shadowGenerator.addShadowCaster(dude, true);
                 
                 const startRotation = dude.rotationQuaternion.clone();
-                   camera.parent = dude;
+                   //camera.parent = dude;
 
                 scene.beginAnimation(result.skeletons[0], 0, 100, true, 1.0);
 
                 let distance = 0;
-                let step = 0.0015;
+                let step = 0.015;
                 let p = 0;
 
                 scene.onBeforeRenderObservable.add(() => {
