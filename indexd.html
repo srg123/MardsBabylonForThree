@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Babylon.js sample code</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <!-- Babylon.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
-        <script src="https://preview.babylonjs.com/ammo.js"></script>
-        <script src="https://preview.babylonjs.com/cannon.js"></script>
-        <script src="https://preview.babylonjs.com/Oimo.js"></script>
-        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
-        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <title>Babylon.js sample code</title>
 
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+    <!-- Babylon.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+    <script src="https://preview.babylonjs.com/ammo.js"></script>
+    <script src="https://preview.babylonjs.com/cannon.js"></script>
+    <script src="https://preview.babylonjs.com/Oimo.js"></script>
+    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
 
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-        </style>
-    </head>
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
+
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
@@ -53,8 +56,8 @@
         var engine = null;
         var scene = null;
         var sceneToRender = null;
-        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
-              var createScene = function () {
+        var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
+        var createScene = function () {
             // This creates a basic Babylon Scene object (non-mesh)
             var scene = new BABYLON.Scene(engine);
             //const xr = scene.createDefaultXRExperienceAsync();
@@ -66,24 +69,12 @@
             //     // This targets the camera to scene origin
             //     camera.setTarget(BABYLON.Vector3.Zero());
 
-              	//camera
-
-                var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 60, BABYLON.Vector3.Zero(), scene);
-
-                //var UniversalCamera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 3, -30), scene);
-
+            var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 60, BABYLON.Vector3.Zero(), scene);
               // const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2.5, 150, new BABYLON.Vector3(0, 60, 0));
                   camera.setTarget(BABYLON.Vector3.Zero());
-                   camera.lowerRadiusLimit = 6;
-                   camera.upperRadiusLimit = 25;
-                //   camera.wheelDeltaPercentage = 0.01;
-                   camera.upperBetaLimit = Math.PI / 2.2;
+              camera.upperBetaLimit = Math.PI / 2.2;
           
-                   camera.attachControl(canvas, true);
-
-                   camera.useFramingBehavior = true;
-
-
+              camera.attachControl(canvas, true);
 
 
 
@@ -118,14 +109,7 @@
 
               const  light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(0, -1, 1), scene);
              light.position = new BABYLON.Vector3(0, 15, -30);
-             light.intensity = 0.9;
-
-              var lighta = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-    lighta.intensity = 0.2;
-    lighta.specular = BABYLON.Color3.Black();
-
-    // var lightb = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(0, -0.5, -1.0), scene);
-    // lightb.position = new BABYLON.Vector3(0, 5, 5);
+             light.intensity = 0.5;
 
               // Shadow generator
              const shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
@@ -144,13 +128,6 @@
             //let groundTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
             let groundTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png");
             ground.material.diffuseTexture = groundTexture;
-
-            //   let groundTexture  = new BABYLON.Texture("textures/wood.jpg", scene);
-            //   ground.material.diffuseTexture = groundTexture;
-            //  ground.material.diffuseTexture.uScale = 30;
-            //  ground.material.diffuseTexture.vScale = 30;
-            //  ground.material.specularColor = new BABYLON.Color3(.1, .1, .1);
-
 
             BABYLON.SceneLoader.ImportMesh("", Assets.meshes.Yeti.rootUrl, Assets.meshes.Yeti.filename, scene, function (newMeshes) {
                 newMeshes[0].scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
@@ -487,7 +464,7 @@
                 shadowGenerator.addShadowCaster(dude, true);
                 
                 const startRotation = dude.rotationQuaternion.clone();
-                camera.parent = dude;
+                   //camera.parent = dude;
 
                 scene.beginAnimation(result.skeletons[0], 0, 100, true, 1.0);
 
@@ -779,8 +756,8 @@
     // GUI
     const adt = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-     panel = new BABYLON.GUI.StackPanel();
-    panel.width = "110px";
+    const panel = new BABYLON.GUI.StackPanel();
+    panel.width = "220px";
     panel.top = "-65px";
     panel.left = "-25px";
     panel.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
@@ -810,53 +787,12 @@
     panel.addControl(slider);
 
 
-    
-    var addButton = function (text, callback) {
-        var button = BABYLON.GUI.Button.CreateSimpleButton("button", text);
-        button.width = "140px";
-        button.height = "40px";
-        button.color = "white";
-        button.background = "green";
-        button.paddingLeft = "10px";
-        button.paddingRight = "10px";
-        button.onPointerUpObservable.add(function () {
-            callback();
-        });
-        panel.addControl(button);
-    }
 
-    addButton("Play", function () {
-        animationGroup.play(true);
-    });
 
-    addButton("Pause", function () {
-        animationGroup.pause();
-    });
-
-    addButton("Stop", function () {
-        animationGroup.reset();
-        animationGroup.stop();
-    });
-   
-
-    var materialBox = new BABYLON.StandardMaterial("texture1", scene);
-    materialBox.diffuseColor = new BABYLON.Color3(0, 1, 0);//Green
 
      const box = BABYLON.MeshBuilder.CreateBox("box", {});
-    box.position.x = 6;
-    box.position.y = 0.5;
-    box.position.z = -6;
-     box.material = materialBox;
-
-
-  
-    var boxt = BABYLON.Mesh.CreateBox("Box2", 1.0, scene);
-     boxt.position.x = 5;
-     boxt.position.y = 1;
-    var materialBox2 = new BABYLON.StandardMaterial("texture2", scene);
-    boxt.material = materialBox2;
-
-
+    box.position.x = 7;
+    box.position.z = -7;
     const frameRate = 6;
 
     const xSlide = new BABYLON.Animation("xSlide", "position.x", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
@@ -865,152 +801,56 @@
 
     keyFrames.push({
         frame: 0,
-        value: 6
+        value: 7
     });
 
     keyFrames.push({
         frame: frameRate,
-        value: -6
+        value: -7
     });
 
     keyFrames.push({
         frame: 2 * frameRate,
-        value: 6
+        value: 7
     });
 
     xSlide.setKeys(keyFrames);
 
     box.animations.push(xSlide);
 
-    //const myAnim = scene.beginAnimation(box, 0, 2 * frameRate, true);
-  // scene.beginDirectAnimation(box, [xSlide, yRot], 0, 2 * frameRate, true);
+    const myAnim = scene.beginAnimation(box, 0, 2 * frameRate, true);
 
-    // var nextAnimation = function() {
-    //     scene.beginDirectAnimation(box, [xSlide], 0, 2 * frameRate, true);
-
-    // }
-    // scene.beginDirectAnimation(box, [yRot], 0, 2 * frameRate, false, 1, nextAnimation);
-    //setTimeout(() => {myAnim.stop()}, 5000);
-
-
-    
-    //Create a scaling animation
-    var animation1 = new BABYLON.Animation("tutoAnimation", "scaling.x", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-
-    // Animation keys
-    var keys = [];
-    //At the animation key 0, the value of scaling is "1"
-    keys.push({
-        frame: 0,
-        value: 1
-    });
-
-    //At the animation key 20, the value of scaling is "0.2"
-    keys.push({
-        frame: 20,
-        value: 0.2
-    });
-
-    //At the animation key 100, the value of scaling is "1"
-    keys.push({
-        frame: 100,
-        value: 1
-    });
-
-    //Adding keys to the animation object
-    animation1.setKeys(keys);
-
-    //Create a second rotation animation with different timeline
-    var animation2 = new BABYLON.Animation("tutoAnimation", "rotation.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-
-    // Animation keys
-    keys = [];
-    keys.push({
-        frame: 0,
-        value: 0
-    });
-
-    keys.push({
-        frame: 40,
-        value: Math.PI
-    });
-
-    keys.push({
-        frame: 80,
-        value: 0
-    });
-
-    //Adding keys to the animation object
-    animation2.setKeys(keys);
-
-      //Create a second rotation animation with different timeline
-    var animation3 = new BABYLON.Animation("tutoAnimation", "rotation.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-
-    // Animation keys
-    keys = [];
-    keys.push({
-        frame: 0,
-        value: 0
-    });
-
-    keys.push({
-        frame: 40,
-        value: Math.PI
-    });
-
-    keys.push({
-        frame: 80,
-        value: 0
-    });
-
-    //Adding keys to the animation object
-    animation3.setKeys(keys);
-
-
-     // Create the animation group
-    var animationGroup = new BABYLON.AnimationGroup("my group");
-    animationGroup.addTargetedAnimation(xSlide, box);
-    animationGroup.addTargetedAnimation(animation1, box);
-    animationGroup.addTargetedAnimation(animation2, box);
-    animationGroup.addTargetedAnimation(animation3, boxt);
-     //animationGroup.speedRatio = 5;
-
-    // Make sure to normalize animations to the same timeline
-    animationGroup.normalize(0, 100);
+    setTimeout(() => {myAnim.stop()}, 5000);
 
     
     /*********performers*********/
+	//camera
+	var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 3, -30), scene);
 
 
     //door
-	var door = BABYLON.MeshBuilder.CreateBox("door", {width:2, height:4, depth:0.1}, scene);
+	var door = BABYLON.MeshBuilder.CreateBox("door", {width:2, height:8, depth:0.1}, scene);
     var hinge = BABYLON.MeshBuilder.CreateBox("hinge", {}, scene)
-	hinge.isVisible = false;
-    hinge.position.x = 1;
-    hinge.position.y = 2;
+	 hinge.isVisible = false;
+    hinge.position.x = 2;
     hinge.position.z = 7;
 	door.parent = hinge;
-	
+	// hinge.position.y = 2;
   
-	 door.position.x = 1;
+
+	//  door.position.x = 2;
     //  door.position.z = 7;
 
-
-    	//lights
-
-    //light positions
+      //light positions
     var sphereLight = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.2}, scene);
     sphereLight.material = new BABYLON.StandardMaterial("", scene);
     sphereLight.material.emissiveColor = new BABYLON.Color3(1, 1, 1);
-    sphereLight.position.x = -1;
+    sphereLight.position.x = 2;
     sphereLight.position.y = 3;
-    sphereLight.position.z = -1;
+    sphereLight.position.z = 0.1;
 
     sphereLights = [sphereLight];
-    lightPositions = [-1, 3, -1]
+    lightPositions = [-2, 3, 6.9]
 
     for(var i = 0; i < 1; i++) {
         sphereLights.push(sphereLight.clone(""));
@@ -1024,8 +864,6 @@
 	    spotLights[i].specular = new BABYLON.Color3(0.5, 0.5, 0.5);
 	    spotLights[i].intensity = 0;
     }
-    
-
 
       /*********animations*************/
 	//for camera to sweep round
@@ -1141,286 +979,58 @@
     });
 
 
-     lightDimmer.setKeys(light_keys);
+    lightDimmer.setKeys(light_keys);
 
     /*******Run Clips**********/
 
-    // scene.beginDirectAnimation(UniversalCamera, [movein, rotate], 0, 25 * frameRate, false);
-    //scene.beginDirectAnimation(hinge, [sweep], 0, 25 * frameRate, false);
-     //scene.beginDirectAnimation(spotLights[0], [lightDimmer], 0, 25 * frameRate, false);
-    //scene.beginDirectAnimation(spotLights[1], [lightDimmer.clone()], 0, 25 * frameRate, false);
+    scene.beginDirectAnimation(camera, [movein, rotate], 0, 25 * frameRate, false);
+    scene.beginDirectAnimation(hinge, [sweep], 0, 25 * frameRate, false);
+    scene.beginDirectAnimation(spotLights[0], [lightDimmer], 0, 25 * frameRate, false);
+    scene.beginDirectAnimation(spotLights[1], [lightDimmer.clone()], 0, 25 * frameRate, false);
 	
        /**************Peripherals of Scene***************/
 	//var ground = BABYLON.MeshBuilder.CreateGround("ground", {width:50, height:50}, scene);
 	
-    var wall1 = BABYLON.MeshBuilder.CreateBox("door", {width:8, height:6, depth:0.1,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+    var wall1 = BABYLON.MeshBuilder.CreateBox("door", {width:8, height:6, depth:0.1}, scene);
 	wall1.position.x = -3;
     wall1.position.y = 3;
     wall1.position.z = 7;
     //wall1.scaling = new BABYLON.Vector3(2, 1.5, 3);
 
-
-     let wallMaterial = new BABYLON.StandardMaterial("Ground Material", scene);
-      wall1.material = wallMaterial;
-      wall1.receiveShadows = true;
-      //wall1.material.diffuseColor = BABYLON.Color3.Red();
-       // let wallTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
-        let wallTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png");
-        wall1.material.diffuseTexture = wallTexture ;
-
-    var wall2 = BABYLON.MeshBuilder.CreateBox("door", {width:4, height:6, depth:0.1,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+    var wall2 = BABYLON.MeshBuilder.CreateBox("door", {width:4, height:6, depth:0.1}, scene);
     wall2.position.x = 5;
     wall2.position.y = 3;
     wall2.position.z = 7;
 
-    wall2.material = wallMaterial;
-    wall2.receiveShadows = true;
-    wall2.material.diffuseTexture = wallTexture ;
-
-    var wall3 = BABYLON.MeshBuilder.CreateBox("door", {width:2, height:2, depth:0.1,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+    var wall3 = BABYLON.MeshBuilder.CreateBox("door", {width:2, height:2, depth:0.1}, scene);
     wall3.position.x = 2;
     wall3.position.y = 5;
     wall3.position.z = 7;
 
-     wall3.material = wallMaterial;
-    wall3.receiveShadows = true;
-    wall3.material.diffuseTexture = wallTexture ;
-
-    var wall4 = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:6, depth:0.1,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+    var wall4 = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:6, depth:0.1}, scene);
     wall4.position.x = 0.1;
     wall4.position.y = 3;
     wall4.position.z = -7;
 
-     wall4.material = wallMaterial;
-    wall4.receiveShadows = true;
-    wall4.material.diffuseTexture = wallTexture ;
-
-    var wall5 = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:6, depth:0.1,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+    var wall5 = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:6, depth:0.1}, scene);
     wall5.rotation.y = Math.PI/2;
     wall5.position.x = -7;
     wall5.position.y = 3;
     wall5.position.z = 0;
 
-    wall5.material = wallMaterial;
-    wall5.receiveShadows = true;
-    wall5.material.diffuseTexture = wallTexture ;
-
-    var wall6 = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:6, depth:0.1,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+    var wall6 = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:6, depth:0.1}, scene);
     wall6.rotation.y = Math.PI/2;
     wall6.position.x = 7;
     wall6.position.y = 3;
     wall6.position.z = 0;
 
-    wall6.material = wallMaterial;
-    wall6.receiveShadows = true;
-    wall6.material.diffuseTexture = wallTexture ;
-
-    var rooft = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:14, depth:0.1}, scene);
-    rooft.rotation.x = Math.PI/2;
-    rooft.position.x = 0;
-    rooft.position.y = 6;
-    rooft.position.z = 0;
-
-    rooft.material = wallMaterial;
-    rooft.receiveShadows = true;
-    rooft.material.diffuseTexture = wallTexture 
+    // var rooft = BABYLON.MeshBuilder.CreateBox("door", {width:14, height:7, depth:0.1}, scene);
+    // rooft.rotation.x = Math.PI/2;
+    // rooft.position.x = -3;
+    // rooft.position.y = 6;
+    // rooft.position.z = 3.5;
 
     }
-
-
-BABYLON.SceneLoader.ImportMesh("", "https://assets.babylonjs.com/meshes/", "HVGirl.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
-        var hero = newMeshes[0];
-        hero.position.x = -1;
-         hero.position.z = -1;
-
-        //Scale the model down        
-        hero.scaling.scaleInPlace(0.1);
-
-        //Lock camera on the character 
-        camera1.target = hero;
-
-
-
-
-   //Hero character variables 
-        var heroSpeed = 0.03;
-        var heroSpeedBackwards = 0.01;
-        var heroRotationSpeed = 0.1;
-
-        var animating = true;
-
-        const walkAnim = scene.getAnimationGroupByName("Walking");
-        const walkBackAnim = scene.getAnimationGroupByName("WalkingBack");
-        const idleAnim = scene.getAnimationGroupByName("Idle");
-        const sambaAnim = scene.getAnimationGroupByName("Samba");
-
-                // //Get the Samba animation Group
-         //const sambaAnim = scene.getAnimationGroupByName("Samba");
-
-        // //Play the Samba animation  
-         sambaAnim.start(true, 1.0, sambaAnim.from, sambaAnim.to, false);
-
-        
-
-        //Rendering loop (executed for everyframe)
-        scene.onBeforeRenderObservable.add(() => {
-            var keydown = false;
-            //Manage the movements of the character (e.g. position, direction)
-            if (inputMap["w"]) {
-                hero.moveWithCollisions(hero.forward.scaleInPlace(heroSpeed));
-                keydown = true;
-            }
-            if (inputMap["s"]) {
-                hero.moveWithCollisions(hero.forward.scaleInPlace(-heroSpeedBackwards));
-                keydown = true;
-            }
-            if (inputMap["a"]) {
-                hero.rotate(BABYLON.Vector3.Up(), -heroRotationSpeed);
-                keydown = true;
-            }
-            if (inputMap["d"]) {
-                hero.rotate(BABYLON.Vector3.Up(), heroRotationSpeed);
-                keydown = true;
-            }
-            if (inputMap["b"]) {
-                keydown = true;
-            }
-
-            //Manage animations to be played  
-            if (keydown) {
-                if (!animating) {
-                    animating = true;
-                    if (inputMap["s"]) {
-                        //Walk backwards
-                        walkBackAnim.start(true, 1.0, walkBackAnim.from, walkBackAnim.to, false);
-                    }
-                    else if
-                        (inputMap["b"]) {
-                        //Samba!
-                        sambaAnim.start(true, 1.0, sambaAnim.from, sambaAnim.to, false);
-                    }
-                    else {
-                        //Walk
-                        walkAnim.start(true, 1.0, walkAnim.from, walkAnim.to, false);
-                    }
-                }
-            }
-            else {
-
-                if (animating) {
-                    //Default animation is idle when no key is down     
-                    idleAnim.start(true, 1.0, idleAnim.from, idleAnim.to, false);
-
-                    //Stop all animations besides Idle Anim when no key is down
-                    sambaAnim.stop();
-                    walkAnim.stop();
-                    walkBackAnim.stop();
-
-                    //Ensure animation are played only once per rendering loop
-                    animating = false;
-                }
-            }
-        });
-    });
-
-
-    
-    // Code in this function will run ~60 times per second
-    // scene.registerBeforeRender(function () {
-    //     // Check if box is moving right
-    //     if (box.position.x < 2 && direction) {
-    //         // Increment box position to the right
-    //         box.position.x += 0.05;
-    //     }
-    //     else {
-    //         // Swap directions to move left
-    //         direction = false;
-    //     }
-
-    //     // Check if box is moving left
-    //     if (box.position.x > -2 && !direction) {
-    //         // Decrement box position to the left
-    //         box.position.x -= 0.05;
-    //     }
-    //     else {
-    //         // Swap directions to move right
-    //         direction = true;
-    //     }
-    // });
-
-
-     var pointerDragBehavior = new BABYLON.PointerDragBehavior({dragAxis: new BABYLON.Vector3(1,0,0)});
-    
-    // Use drag plane in world space
-    pointerDragBehavior.useObjectOrientationForDragging = false;
-
-    // Listen to drag events
-    pointerDragBehavior.onDragStartObservable.add((event)=>{
-        console.log("dragStart");
-        console.log(event);
-    })
-    pointerDragBehavior.onDragObservable.add((event)=>{
-        console.log("drag");
-        console.log(event);
-    })
-    pointerDragBehavior.onDragEndObservable.add((event)=>{
-        console.log("dragEnd");
-        console.log(event);
-    })
-
-    // If handling drag events manually is desired, set move attached to false
-    // pointerDragBehavior.moveAttached = false;
-
-    boxt.addBehavior(pointerDragBehavior);
-
-
-    //    var boundingBox = BABYLON.BoundingBoxGizmo.MakeNotPickableAndWrapInBoundingBox(boxt)
-        
-    //     // Create bounding box gizmo
-    //     var utilLayer = new BABYLON.UtilityLayerRenderer(scene)
-    //     utilLayer.utilityLayerScene.autoClearDepthAndStencil = false;
-    //     var gizmo = new BABYLON.BoundingBoxGizmo(BABYLON.Color3.FromHexString("#0984e3"), utilLayer)
-    //     gizmo.attachedMesh = boundingBox;
-
-    //     // Create behaviors to drag and scale with pointers in VR
-    //     var sixDofDragBehavior = new BABYLON.SixDofDragBehavior()
-    //     boundingBox.addBehavior(sixDofDragBehavior)
-    //     var multiPointerScaleBehavior = new BABYLON.MultiPointerScaleBehavior()
-    //     boundingBox.addBehavior(multiPointerScaleBehavior)
-
-        // Create app bar
-        // var appBar = new BABYLON.TransformNode("");
-        // appBar.scaling.scaleInPlace(0.2)
-        // var panel = new BABYLON.GUI.PlanePanel();
-        // panel.margin = 0;
-        // panel.rows = 1;
-        // manager.addControl(panel);
-        //panel.linkToTransformNode(appBar);
-        // for (var index = 0; index < 2; index++) {
-        //     var button = new BABYLON.GUI.HolographicButton("orientation");
-        //     panel.addControl(button);
-        //     button.text = "Button #" + panel.children.length;
-        //     if(index == 0){
-        //         button.onPointerClickObservable.add(()=>{
-        //             if(gizmo.attachedMesh){
-        //                 gizmo.attachedMesh = null;
-        //                 boundingBox.removeBehavior(sixDofDragBehavior)
-        //                 boundingBox.removeBehavior(multiPointerScaleBehavior)
-        //             }else{
-        //                 gizmo.attachedMesh = boundingBox;
-        //                 boundingBox.addBehavior(sixDofDragBehavior)
-        //                 boundingBox.addBehavior(multiPointerScaleBehavior)
-        //             }
-        //         })
-        //     }
-        // }
-
-        //attach app bar to bounding box
-        // var behavior = new BABYLON.AttachToBoxBehavior(appBar);
-        // boundingBox.addBehavior(behavior);
-
-      camera.setTarget(box1);
-
 
             return scene;
         };
@@ -1556,23 +1166,25 @@ BABYLON.SceneLoader.ImportMesh("", "https://assets.babylonjs.com/meshes/", "HVGi
             return roof;
         }
 
-                window.initFunction = async function() {
-                    
-                    
-                    var asyncEngineCreation = async function() {
-                        try {
-                        return createDefaultEngine();
-                        } catch(e) {
-                        console.log("the available createEngine function failed. Creating the default engine instead");
-                        return createDefaultEngine();
-                        }
-                    }
+        window.initFunction = async function () {
 
-                    window.engine = await asyncEngineCreation();
-        if (!engine) throw 'engine should not be null.';
-        startRenderLoop(engine, canvas);
-        window.scene = createScene();};
-        initFunction().then(() => {sceneToRender = scene                    
+
+            var asyncEngineCreation = async function () {
+                try {
+                    return createDefaultEngine();
+                } catch (e) {
+                    console.log("the available createEngine function failed. Creating the default engine instead");
+                    return createDefaultEngine();
+                }
+            }
+
+            window.engine = await asyncEngineCreation();
+            if (!engine) throw 'engine should not be null.';
+            startRenderLoop(engine, canvas);
+            window.scene = createScene();
+        };
+        initFunction().then(() => {
+            sceneToRender = scene
         });
 
         // Resize
@@ -1581,4 +1193,5 @@ BABYLON.SceneLoader.ImportMesh("", "https://assets.babylonjs.com/meshes/", "HVGi
         });
     </script>
 </body>
+
 </html>
