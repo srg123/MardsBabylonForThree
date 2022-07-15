@@ -68,17 +68,17 @@
 
             //     // This targets the camera to scene origin
 
-            //const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2.5, 150, new BABYLON.Vector3(0, 60, 0));
-            // camera.setTarget(BABYLON.Vector3.Zero());
+            // const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2.5, 50, new BABYLON.Vector3(0, 60, 0));
+
 
 
             var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 60, BABYLON.Vector3.Zero(), scene);
-
+            //camera.setTarget(BABYLON.Vector3.Zero());
             //var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 3, -30), scene);
 
 
-            //    camera.lowerRadiusLimit = 6;
-            //    camera.upperRadiusLimit = 25;
+            camera.lowerRadiusLimit = 6;
+            camera.upperRadiusLimit = 30;
             //   camera.wheelDeltaPercentage = 0.01;
             camera.upperBetaLimit = Math.PI / 2.2;
             camera.useFramingBehavior = true;
@@ -86,7 +86,7 @@
             camera.attachControl(canvas, true);
             //camera.minZ = 15;
 
-            camera.setTarget(BABYLON.Vector3.Zero());
+            //camera.setTarget(BABYLON.Vector3.Zero());
 
 
             //Set gravity for the scene (G force like, on Y-axis)
@@ -147,7 +147,7 @@
 
 
             // Shadow generator
-            const shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+            const shadowGenerator = new BABYLON.ShadowGenerator(512, light);
 
             // 地面.
             var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 14, height: 14 }, scene);
@@ -166,7 +166,7 @@
             ground.material.diffuseTexture.vScale = 5;
             //ground.material.specularColor = new BABYLON.Color3(.1, .1, .1);
 
-            var mirror = new BABYLON.MirrorTexture("mirror", 1024, scene);
+            var mirror = new BABYLON.MirrorTexture("mirror", 512, scene);
             mirror.mirrorPlane = new BABYLON.Plane(0, -1, 0, 0);
             mirror.renderList.push(boxt);
 
@@ -196,12 +196,12 @@
 
 
 
-            BABYLON.SceneLoader.ImportMesh("", Assets.meshes.Yeti.rootUrl, Assets.meshes.Yeti.filename, scene, function (newMeshes) {
-                newMeshes[0].scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
-                newMeshes[0].position = new BABYLON.Vector3(-1, 0, 3);
-                newMeshes[0].rotation = new BABYLON.Vector3(0, Math.PI / 12, 0);
-                newMeshes[0].movePOV(0, 0, 6);
-            });
+            // BABYLON.SceneLoader.ImportMesh("", Assets.meshes.Yeti.rootUrl, Assets.meshes.Yeti.filename, scene, function (newMeshes) {
+            //     newMeshes[0].scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
+            //     newMeshes[0].position = new BABYLON.Vector3(-1, 0, 3);
+            //     newMeshes[0].rotation = new BABYLON.Vector3(0, Math.PI / 12, 0);
+            //     newMeshes[0].movePOV(0, 0, 6);
+            // });
 
 
 
@@ -443,6 +443,7 @@
                 dude.scaling = new BABYLON.Vector3(0.03, 0.03, 0.03);
                 //dube.rotation.x = -Math.PI / 2;
                 shadowGenerator.addShadowCaster(dude, true);
+                camera.setTarget(dube)
 
                 scene.beginAnimation(result.skeletons[0], 0, 100, true, 1.0);
 
@@ -611,7 +612,7 @@
             // const largeGroundMat = new BABYLON.StandardMaterial("largeGroundMat");
             // largeGroundMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/valleygrass.png");
 
-               // Create and tweak the background material.
+            // Create and tweak the background material.
             var largeGroundMat = new BABYLON.BackgroundMaterial("backgroundMaterial", scene);
             largeGroundMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/valleygrass.png", scene);
             // largeGroundMat.diffuseTexture.uScale = 5.0;//Repeat 5 times on the Vertical Axes
@@ -626,7 +627,7 @@
             // largeGroundMat.reflectionTexture = mirror2;
             // largeGroundMat.reflectionFresnel = true;
             // largeGroundMat.reflectionStandardFresnelWeight = 0.8;
-           
+
 
             const largeGround = BABYLON.MeshBuilder.CreateGroundFromHeightMap("largeGround", "https://assets.babylonjs.com/environments/villageheightmap.png", { width: 150, height: 150, subdivisions: 20, minHeight: 0, maxHeight: 10 });
             largeGround.position.y = -0.01;
@@ -711,15 +712,16 @@
                         break;
                 }
             });
-            //Create lathe
+            //喷泉
             const fountain = BABYLON.MeshBuilder.CreateLathe("fountain", { shape: fountainProfile, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene);
-            fountain.position = new BABYLON.Vector3(4, 0, 6);
-            fountain.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
+            fountain.position = new BABYLON.Vector3(4, 0, 13);
+            fountain.scaling = new BABYLON.Vector3(0.08, 0.08, 0.08);
+            // camera.setTarget(fountain);
 
 
             // Create a particle system
             const particleSystem = new BABYLON.ParticleSystem("particles", 5000);
-            // particleSystem.worldOffset = new BABYLON.Vector3(-4, 0.8, -6);
+            //particleSystem.worldOffset = new BABYLON.Vector3(-4, 0.8, 3);
             // // particleSystem.targetStopDuration = 30;  //五秒后粒子效果会停止
 
 
@@ -729,7 +731,7 @@
             particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png");
 
             // Where the particles come from
-            particleSystem.emitter = new BABYLON.Vector3(4, 0.8, 6); // emitted from the top of the fountain
+            particleSystem.emitter = new BABYLON.Vector3(4, 0.8, 13); // emitted from the top of the fountain
             particleSystem.minEmitBox = new BABYLON.Vector3(-0.01, 0, -0.01); // Starting all from
             particleSystem.maxEmitBox = new BABYLON.Vector3(0.01, 0, 0.01); // To...
 
@@ -738,15 +740,15 @@
             particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
 
             // Size of each particle (random between...
-            particleSystem.minSize = 0.01;
-            particleSystem.maxSize = 0.05;
+            particleSystem.minSize = 0.05;
+            particleSystem.maxSize = 0.09;
 
             // Life time of each particle (random between...
             particleSystem.minLifeTime = 0.3;
             particleSystem.maxLifeTime = 1.5;
 
             // Emission rate
-            particleSystem.emitRate = 1500;
+            particleSystem.emitRate = 2500;
 
             // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
             particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
@@ -767,7 +769,7 @@
 
 
             // Start the particle system
-            //particleSystem.start();
+            particleSystem.start();
 
 
             //add a spotlight and later after a mesh lamp post and a bulb have been created
@@ -798,7 +800,7 @@
             //extrude lamp
             const lamp = BABYLON.MeshBuilder.ExtrudeShape("lamp", { cap: BABYLON.Mesh.CAP_END, shape: lampShape, path: lampPath, scale: 0.5 });
 
-            lamp.position = new BABYLON.Vector3(-5, 0, 4);
+            lamp.position = new BABYLON.Vector3(1, 0, -18);
             lamp.scaling = new BABYLON.Vector3(0.5, 0.5, 0.5);
             //add bulb
             const bulb = BABYLON.MeshBuilder.CreateSphere("bulb", { diameterX: 1.5, diameterZ: 0.8 });
@@ -808,6 +810,7 @@
             bulb.parent = lamp;
             bulb.position.x = 2;
             bulb.position.y = 10.5;
+
 
             lampLight.parent = bulb;
 
@@ -1079,17 +1082,17 @@
             lightPositions = [-1, 3, -1]
 
             for (var i = 0; i < 1; i++) {
-                sphereLights.push(sphereLight.clone(""));
-                sphereLights[i + 1].position = new BABYLON.Vector3(lightPositions[3 * i], lightPositions[3 * i + 1], lightPositions[3 * i + 2])
+                // sphereLights.push(sphereLight.clone(""));
+                // sphereLights[i + 1].position = new BABYLON.Vector3(lightPositions[3 * i], lightPositions[3 * i + 1], lightPositions[3 * i + 2])
 
-                var spotLights = [];
-                var lightDirections = [-0.5, -0.25, 1, 0, 0, -1]
-                for (var i = 0; i < sphereLights.length; i++) {
-                    spotLights[i] = new BABYLON.SpotLight("spotlight" + i, sphereLights[i].position, new BABYLON.Vector3(lightDirections[3 * i], lightDirections[3 * i + 1], lightDirections[3 * i + 2]), Math.PI / 8, 5, scene);
-                    spotLights[i].diffuse = new BABYLON.Color3(1, 1, 1);
-                    spotLights[i].specular = new BABYLON.Color3(0.5, 0.5, 0.5);
-                    spotLights[i].intensity = 0;
-                }
+                // var spotLights = [];
+                // var lightDirections = [-0.5, -0.25, 1, 0, 0, -1]
+                // for (var i = 0; i < sphereLights.length; i++) {
+                //     spotLights[i] = new BABYLON.SpotLight("spotlight" + i, sphereLights[i].position, new BABYLON.Vector3(lightDirections[3 * i], lightDirections[3 * i + 1], lightDirections[3 * i + 2]), Math.PI / 8, 5, scene);
+                //     spotLights[i].diffuse = new BABYLON.Color3(1, 1, 1);
+                //     spotLights[i].specular = new BABYLON.Color3(0.5, 0.5, 0.5);
+                //     spotLights[i].intensity = 0;
+                // }
 
 
 
@@ -1225,8 +1228,8 @@
 
 
                 let wallMaterial = new BABYLON.StandardMaterial("Ground Material", scene);
-                wallMaterial.alpha = 0.2;
-                wallMaterial.disableDepthWrite = true;
+                wallMaterial.alpha = 0.5;
+                //wallMaterial.disableDepthWrite = true;
                 // let wallTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
                 let wallTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png");
 
@@ -1320,7 +1323,7 @@
                 hero.scaling.scaleInPlace(0.1);
 
                 //Lock camera on the character 
-                camera1.target = hero;
+                //camera1.target = hero;
 
 
 
@@ -1343,7 +1346,7 @@
                 // //Play the Samba animation  
                 sambaAnim.start(true, 1.0, sambaAnim.from, sambaAnim.to, false);
 
-                //camera.setTarget(hero);
+
 
                 //Rendering loop (executed for everyframe)
                 // scene.onBeforeRenderObservable.add(() => {
@@ -1563,7 +1566,7 @@
                 gunSight.material = mat;
             }
 
-            addGunSight(scene);
+            // addGunSight(scene);
 
 
             // Fog
