@@ -1685,24 +1685,24 @@ backgroundMaterial.opacityFresnel = false;
 
 
 // Create a sprite manager
-const spriteManagerPlayer3 = new BABYLON.SpriteManager("playerManager", "textures/player.png", 3, 64);
-spriteManagerPlayer3.isPickable = true;   
+// const spriteManagerPlayer3 = new BABYLON.SpriteManager("playerManager", "textures/player.png", 3, 64);
+// spriteManagerPlayer3.isPickable = true;   
 
-const player = new BABYLON.Sprite("player0", spriteManagerPlayer3);
-player.isPickable = true;
-player.useAlphaForPicking = true;
-player.position = new BABYLON.Vector3(0,0.5,18)
-// player.angle = Math.PI/4;
-// player.invertU = true; //vertical reflection
-// player.invertV = true; //horizontal reflection
-player.playAnimation(0, 40, true, 100);
+// const player = new BABYLON.Sprite("player0", spriteManagerPlayer3);
+// player.isPickable = true;
+// player.useAlphaForPicking = true;
+// player.position = new BABYLON.Vector3(0,0.5,18)
+// // player.angle = Math.PI/4;
+// // player.invertU = true; //vertical reflection
+// // player.invertV = true; //horizontal reflection
+// player.playAnimation(0, 40, true, 100);
 
-scene.onPointerDown = function (evt) {
-var pickResult = scene.pickSprite(this.pointerX, this.pointerY);
-if (pickResult.hit) {
-pickResult.pickedSprite.angle += 0.5;
-}
-};
+// scene.onPointerDown = function (evt) {
+// var pickResult = scene.pickSprite(this.pointerX, this.pointerY);
+// if (pickResult.hit) {
+// pickResult.pickedSprite.angle += 0.5;
+// }
+// };
 
 // Load the spritesheet (with appropriate settings) associated with the JSON Atlas.
 let spriteSheet = new BABYLON.Texture("textures/spriteMap/none_trimmed/Legends_Level_A.png", scene,
