@@ -71,26 +71,9 @@
         var sceneToRender = null;
         var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
 
-        // var loadingScreenDiv = window.document.getElementById("loadingScreen");
+        var createScene = function () {
 
-// function customLoadingScreen() {
-//     console.log("customLoadingScreen creation")
-// }
-// customLoadingScreen.prototype.displayLoadingUI = function () {
-//     console.log("customLoadingScreen loading")
-//     loadingScreenDiv.innerHTML = "loading";
-// };
-// customLoadingScreen.prototype.hideLoadingUI = function () {
-//     console.log("customLoadingScreen loaded")
-//     loadingScreenDiv.style.display = "none";
-// };
-// var loadingScreen = new customLoadingScreen();
-// engine.loadingScreen = loadingScreen;
-
-
-var createScene = function () {
-
-engine.displayLoadingUI();
+//engine.displayLoadingUI();
 // This creates a basic Babylon Scene object (non-mesh)
 var scene = new BABYLON.Scene(engine);
 //const xr = scene.createDefaultXRExperienceAsync();
@@ -134,15 +117,15 @@ camera.attachControl(canvas, true);
 // scene.createDefaultLight();
 
 
-scene.createDefaultCamera(true, true, true);
+// scene.createDefaultCamera(true, true, true);
 
-var helperCamera = scene.activeCamera;
+// var helperCamera = scene.activeCamera;
 
-helperCamera.position = new BABYLON.Vector3(0,7,40);
-helperCamera.lowerRadiusLimit = 6;
-helperCamera.upperRadiusLimit = 30;
-//   camera.wheelDeltaPercentage = 0.01;
-helperCamera.upperBetaLimit = Math.PI / 2.2;
+// helperCamera.position = new BABYLON.Vector3(0,7,40);
+// helperCamera.lowerRadiusLimit = 6;
+// helperCamera.upperRadiusLimit = 30;
+// //   camera.wheelDeltaPercentage = 0.01;
+// helperCamera.upperBetaLimit = Math.PI / 2.2;
 
 
 // setTimeout(function(){
@@ -223,18 +206,18 @@ ground.material = groundMaterial;
 
 //https://www.babylonjs-playground.com/textures/floor.png
 //let groundTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
-// let groundTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/backgroundGround.png");
-let groundTexture = new BABYLON.Texture("textures/wood.jpg", scene);
+//let groundTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/backgroundGround.png");
+let groundTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png", scene);
 ground.material.diffuseTexture = groundTexture;
 ground.material.diffuseTexture.uScale = 5;
 ground.material.diffuseTexture.vScale = 5;
 //ground.material.specularColor = new BABYLON.Color3(.1, .1, .1);
 
-var mirror = new BABYLON.MirrorTexture("mirror", 512, scene);
-mirror.mirrorPlane = new BABYLON.Plane(0, -1, 0, 0);
-mirror.renderList.push(boxt);
+// var mirror = new BABYLON.MirrorTexture("mirror", 512, scene);
+// mirror.mirrorPlane = new BABYLON.Plane(0, -1, 0, 0);
+// mirror.renderList.push(boxt);
 
-ground.material.reflectionTexture = mirror;
+// ground.material.reflectionTexture = mirror;
 
 
 
@@ -411,48 +394,48 @@ const buildRoof = () => {
 
 }
 
-//    const detached_house = buildHouse(1);
-//     detached_house.rotation.y = -Math.PI / 16;
-//     detached_house.position.x = -6.8;
-//     detached_house.position.z = 2.5;
+   const detached_house = buildHouse(1);
+    detached_house.rotation.y = -Math.PI / 16;
+    detached_house.position.x = -6.8;
+    detached_house.position.z = 12.5;
 
-//     const semi_house = buildHouse(2);
-//     semi_house .rotation.y = -Math.PI / 16;
-//     semi_house.position.x = -4.5;
-//     semi_house.position.z = 3;
+    const semi_house = buildHouse(2);
+    semi_house .rotation.y = -Math.PI / 16;
+    semi_house.position.x = -4.5;
+    semi_house.position.z = 13;
 
-//     const places = []; //each entry is an array [house type, rotation, x, z]
-//     places.push([1, -Math.PI / 16, -6.8, 2.5 ]);
-//     places.push([2, -Math.PI / 16, -4.5, 3 ]);
-//     places.push([2, -Math.PI / 16, -1.5, 4 ]);
-//     places.push([2, -Math.PI / 3, 1.5, 6 ]);
-//     places.push([2, 15 * Math.PI / 16, -6.4, -1.5 ]);
-//     places.push([1, 15 * Math.PI / 16, -4.1, -1 ]);
-//     places.push([2, 15 * Math.PI / 16, -2.1, -0.5 ]);
-//     places.push([1, 5 * Math.PI / 4, 0, -1 ]);
-//     places.push([1, Math.PI + Math.PI / 2.5, 0.5, -3 ]);
-//     places.push([2, Math.PI + Math.PI / 2.1, 0.75, -5 ]);
-//     places.push([1, Math.PI + Math.PI / 2.25, 0.75, -7 ]);
-//     places.push([2, Math.PI / 1.9, 4.75, -1 ]);
-//     places.push([1, Math.PI / 1.95, 4.5, -3 ]);
-//     places.push([2, Math.PI / 1.9, 4.75, -5 ]);
-//     places.push([1, Math.PI / 1.9, 4.75, -7 ]);
-//     places.push([2, -Math.PI / 3, 5.25, 2 ]);
-//     places.push([1, -Math.PI / 3, 6, 4 ]);
+    const places = []; //each entry is an array [house type, rotation, x, z]
+    places.push([1, -Math.PI / 16, -16.8, 12.5 ]);
+    places.push([2, -Math.PI / 16, -14.5, 13 ]);
+    places.push([2, -Math.PI / 16, -11.5, 14 ]);
+    places.push([2, -Math.PI / 3, 11.5, 16 ]);
+    places.push([2, 15 * Math.PI / 26, -6.4, -11.5 ]);
+    places.push([1, 15 * Math.PI / 26, -4.1, -11 ]);
+    places.push([2, 15 * Math.PI / 26, -2.1, -10.5 ]);
+    places.push([1, 5 * Math.PI / 14, 0, -1 ]);
+    places.push([1, Math.PI + Math.PI / 12.5, 0.5, -13 ]);
+    places.push([2, Math.PI + Math.PI / 12.1, 0.75, -15 ]);
+    places.push([1, Math.PI + Math.PI / 12.25, 0.75, -17 ]);
+    places.push([2, Math.PI / 1.9, 14.75, -11 ]);
+    places.push([1, Math.PI / 1.95, 14.5, -13 ]);
+    places.push([2, Math.PI / 1.9, 14.75, -15 ]);
+    places.push([1, Math.PI / 1.9, 14.75, -17 ]);
+    places.push([2, -Math.PI / 3, 15.25, 12 ]);
+    places.push([1, -Math.PI / 3, 16, 14 ]);
 
-//     //Create instances from the first two that were built 
-//     const houses = [];
-//     for (let i = 0; i < places.length; i++) {
-//         if (places[i][0] === 1) {
-//             houses[i] = detached_house.createInstance("house" + i);
-//         }
-//         else {
-//             houses[i] = semi_house.createInstance("house" + i);
-//         }
-//         houses[i].rotation.y = places[i][1];
-//         houses[i].position.x = places[i][2];
-//         houses[i].position.z = places[i][3];
-//     }
+    //Create instances from the first two that were built 
+    const houses = [];
+    for (let i = 0; i < places.length; i++) {
+        if (places[i][0] === 1) {
+            houses[i] = detached_house.createInstance("house" + i);
+        }
+        else {
+            houses[i] = semi_house.createInstance("house" + i);
+        }
+        houses[i].rotation.y = places[i][1];
+        houses[i].position.x = places[i][2];
+        houses[i].position.z = places[i][3];
+    }
 
 
 
@@ -699,10 +682,10 @@ largeGround.material = largeGroundMat;
 
 
 const spriteManagerUFO = new BABYLON.SpriteManager("UFOManager", "https://assets.babylonjs.com/environments/ufo.png", 1, { width: 128, height: 76 });
-const ufo = new BABYLON.Sprite("ufo", spriteManagerUFO);
+var ufo = new BABYLON.Sprite("ufo", spriteManagerUFO);
 ufo.playAnimation(0, 16, true, 125);
 ufo.position.y = 5;
-ufo.position.z = 20;
+ufo.position.z = -30;
 ufo.width = 2;
 ufo.height = 1;
 
@@ -1278,7 +1261,7 @@ for (var i = 0; i < 1; i++) {
 
    /*******Run Clips**********/
 
-    scene.beginDirectAnimation(helperCamera, [movein, rotate], 0, 25 * frameRate, false);
+    //scene.beginDirectAnimation(helperCamera, [movein, rotate], 0, 25 * frameRate, false);
     scene.beginDirectAnimation(hinge, [sweep], 0, 25 * frameRate, false);
    //  scene.beginDirectAnimation(spotLights[0], [lightDimmer], 0, 25 * frameRate, false);
    // scene.beginDirectAnimation(spotLights[1], [lightDimmer.clone()], 0, 25 * frameRate, false);
@@ -1667,17 +1650,17 @@ function addGunSight(scene) {
 
 
 // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-var ground = BABYLON.Mesh.CreateGround("ground1", 12, 12, 2, scene);
-ground.position = new BABYLON.Vector3(0, 0, -18)
+// var ground = BABYLON.Mesh.CreateGround("ground1", 12, 12, 2, scene);
+// ground.position = new BABYLON.Vector3(0, 0, -18)
 
-// Create and tweak the background material.
-var backgroundMaterial = new BABYLON.BackgroundMaterial("backgroundMaterial", scene);
-backgroundMaterial.diffuseTexture = new BABYLON.Texture("textures/grass.jpg", scene);
-backgroundMaterial.diffuseTexture.uScale = 5.0;//Repeat 5 times on the Vertical Axes
-backgroundMaterial.diffuseTexture.vScale = 5.0;//Repeat 5 times on the Horizontal Axes
-backgroundMaterial.shadowLevel = 0.4;
-backgroundMaterial.diffuseTexture.hasAlpha = true;
-backgroundMaterial.opacityFresnel = false;
+// // Create and tweak the background material.
+// var backgroundMaterial = new BABYLON.BackgroundMaterial("backgroundMaterial", scene);
+// backgroundMaterial.diffuseTexture = new BABYLON.Texture("textures/grass.jpg", scene);
+// backgroundMaterial.diffuseTexture.uScale = 5.0;//Repeat 5 times on the Vertical Axes
+// backgroundMaterial.diffuseTexture.vScale = 5.0;//Repeat 5 times on the Horizontal Axes
+// backgroundMaterial.shadowLevel = 0.4;
+// backgroundMaterial.diffuseTexture.hasAlpha = true;
+// backgroundMaterial.opacityFresnel = false;
 
 // backgroundMaterial.reflectionTexture = new BABYLON.CubeTexture("textures/TropicalSunnyDay", scene);
 // backgroundMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
@@ -1685,24 +1668,24 @@ backgroundMaterial.opacityFresnel = false;
 
 
 // Create a sprite manager
-// const spriteManagerPlayer3 = new BABYLON.SpriteManager("playerManager", "textures/player.png", 3, 64);
-// spriteManagerPlayer3.isPickable = true;   
+const spriteManagerPlayer3 = new BABYLON.SpriteManager("playerManager", "textures/player.png", 3, 64);
+spriteManagerPlayer3.isPickable = true;   
 
-// const player = new BABYLON.Sprite("player0", spriteManagerPlayer3);
-// player.isPickable = true;
-// player.useAlphaForPicking = true;
-// player.position = new BABYLON.Vector3(0,0.5,18)
-// // player.angle = Math.PI/4;
-// // player.invertU = true; //vertical reflection
-// // player.invertV = true; //horizontal reflection
-// player.playAnimation(0, 40, true, 100);
+const player = new BABYLON.Sprite("player0", spriteManagerPlayer3);
+player.isPickable = true;
+player.useAlphaForPicking = true;
+player.position = new BABYLON.Vector3(0,0.5,18)
+// player.angle = Math.PI/4;
+// player.invertU = true; //vertical reflection
+// player.invertV = true; //horizontal reflection
+player.playAnimation(0, 40, true, 100);
 
-// scene.onPointerDown = function (evt) {
-// var pickResult = scene.pickSprite(this.pointerX, this.pointerY);
-// if (pickResult.hit) {
-// pickResult.pickedSprite.angle += 0.5;
-// }
-// };
+scene.onPointerDown = function (evt) {
+var pickResult = scene.pickSprite(this.pointerX, this.pointerY);
+if (pickResult.hit) {
+pickResult.pickedSprite.angle += 0.5;
+}
+};
 
 // Load the spritesheet (with appropriate settings) associated with the JSON Atlas.
 let spriteSheet = new BABYLON.Texture("textures/spriteMap/none_trimmed/Legends_Level_A.png", scene,
@@ -1788,8 +1771,8 @@ break;
 
 
 var kernel = 32.0;	
-var postProcess0 = new BABYLON.BlurPostProcess("Horizontal blur", new BABYLON.Vector2(1.0, 0), kernel, 1.0, camera);
-var postProcess1 = new BABYLON.BlurPostProcess("Vertical blur", new BABYLON.Vector2(0, 1.0), kernel, 1.0, camera);
+// var postProcess0 = new BABYLON.BlurPostProcess("Horizontal blur", new BABYLON.Vector2(1.0, 0), kernel, 1.0, camera);
+// var postProcess1 = new BABYLON.BlurPostProcess("Vertical blur", new BABYLON.Vector2(0, 1.0), kernel, 1.0, camera);
 
 
 
@@ -1926,7 +1909,6 @@ roof.position.y = 1.22;
 
 return roof;
 }
-
 
       window.initFunction = async function () {
 
